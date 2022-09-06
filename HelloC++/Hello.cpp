@@ -1,39 +1,50 @@
 #include <iostream>
- 
+# include <ctime> 
 using namespace std;
 
-// 1. 自定义学生结构体类型
-struct Student
+// 结构体数组
+struct Hero
 {
 	string name;
 	int age;
-	int score;
-} s3; // 在定义结构体时顺便创建结构体变量
+	string sex;
+};
+
+void bubbleSort(Hero heroArray[], int len)
+{
+	for(int i=0; i<len; i++)
+	{
+		for(int j=i; j<len; j++)
+		{
+			if(heroArray[i].age > heroArray[j].age)
+			{
+				Hero temp = heroArray[j];
+				temp = heroArray[i];
+				heroArray[i] = heroArray[j];
+				heroArray[j] = temp;
+			}
+		}
+	}
+}
 
 // 主函数
 int main(int argc, char *argv[])
-{	
-	// 2. 通过学生类型创建具体学生
-	// 2.1 方式1
-	struct Student s1;
-	s1.name = "张三";
-	s1.age = 18;
-	s1.score = 100;
+{
+	Hero heroArray[5] = 
+	{
+		{"刘备", 23, "男"},
+		{"关羽", 22, "男"},
+		{"张飞", 20, "男"},
+		{"赵云", 21, "男"},
+		{"貂蝉", 19, "男"}
+	};
 
-	cout << "姓名: " << s1.name << " 年龄: " << s1.age << " 分数: " << s1.score << endl;
+	int len = sizeof(heroArray) / sizeof(heroArray[0]);
 
+	bubbleSort(heroArray, len);
 
-	// 2.2 方式2
-	// 在C++ 中 创建结构体变量时 struct 关键字可以省略
-	Student s2 = {"李四", 19, 90};
-	cout << "姓名: " << s2.name << " 年龄: " << s2.age << " 分数: " << s2.score << endl;
-
-	// 2.3 方式3
-	// 在定义结构体时顺便创建结构体变量， 不建议用
-	s3.name = "王五";
-	s3.age = 20;
-	s3.score = 100;
-
-	cout << "姓名: " << s3.name << " 年龄: " << s3.age << " 分数: " << s3.score << endl;
+	for(int i=0; i<len; i++)
+	{
+		cout << "姓名: " << heroArray[i].name << " 年龄: " << heroArray[i].age << " 性别: " << heroArray[i].sex << endl;
+	}
 }
-
