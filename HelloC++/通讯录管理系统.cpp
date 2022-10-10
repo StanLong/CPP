@@ -1,64 +1,53 @@
 # include <iostream>
 using namespace std;
 
-
-// 继承同名静态成员处理方式
-class Base
+// 多态
+class Animal
 {
     public:
-    static int m_A;
-
-    static void func()
+    int m_A;
+    // 虚函数
+    virtual void speak()
     {
-        cout << "父类成员函数" << endl;
-    }
-
-    static void func(int a)
-    {
-        cout << "父类成员函数" << endl;
+        cout << " 会叫 " << endl;
     }
 };
 
-int Base::m_A = 100;
-
-class Son :public Base
+class Cat: public Animal
 {
     public:
-    static int m_A;
-    static void func()
+    void speak()
     {
-        cout << "子类成员函数" << endl;
+        cout << " 喵喵~ " << endl;
     }
-
 };
 
-int Son::m_A=200;
+class Dog: public Animal
+{
+    public:
+    void speak()
+    {
+        cout << " 汪汪~ " << endl;
+    }
+};
+
+// 地址早绑定，在编译阶段就确定了函数的地址
+// 如果想实现地址晚绑定，就要用动态多态
+// 动态多态满足条件
+// 1. 有继承关系
+// 2. 子类重写父类的虚函数
+void doSpeak(Animal &animal)
+{
+    animal.speak();
+}
 
 void test01()
 {
-    Son son; 
-    // 通过对象访问
-    cout << "访问子类同名成员，直接访问即可: " << son.m_A << endl;
-    cout << "访问父类同名成员，需要加载作用域: " << son.Base::m_A << endl;
+    Cat cat;
+    doSpeak(cat);
 
-
-    // 通过类名访问
-    cout << "访问子类同名成员，直接访问即可: " << Son::m_A << endl;
-    // 第一个 :: 代表通过类名的方式访问，  第二个 :: 代表访问父类作用域下的m_A
-    cout << "访问父类同名成员，需要加载作用域: " << Son::Base::m_A << endl;
-
-    // 通过对象访问成员函数
-    son.func();
-    son.Base::func();
-
-    // 通过类名访问成员函数
-    Son::func();
-    Son::Base::func();
-
-    // 子类出现和父类同名静态成员函数，也会隐藏父类中所有同名成员函数
-    Son::Base::func(100);
-
-    
+    Dog dog;
+    doSpeak(dog);
 }
 
 int main(int argc, char *argv[])
