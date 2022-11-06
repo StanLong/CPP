@@ -7,18 +7,34 @@ using namespace std;
 
 void test01()
 {
-    string s1; // 默认构造
-    
-    const char * str = "hello world";
-    string s2(str);
+    string str1 = "我";
+	str1 += "爱玩游戏";
+	cout << "str1=" << str1 << endl;
 
-    cout << "s2=" << s2 << endl;
+	str1 += ':';
+	cout << "str1=" << str1 << endl;
 
-    string s3(s2);
-    cout << "s3=" << s3 << endl;
+	string str2 = "LOL, DNF";
+	str1 += str2;
+	cout << "str1=" << str1 << endl;
 
-    string s4(10, 'a');
-    cout << "s4=" << s4 << endl;
+	string str3 = "I";
+	str3.append(" love");
+	cout << "str3=" << str3 << endl;
+
+	str3.append(" game abcde", 5);
+	cout << "str3=" << str3 << endl;
+
+
+	//str3.append(str2);
+	//cout << "str3=" << str3 << endl;
+
+	str3.append(str2, 0, 3);
+	cout << "str3=" << str3 << endl;
+
+
+
+
 
 
 }
