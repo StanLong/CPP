@@ -199,10 +199,38 @@ string& replace(int pos,int n,const char* s);///替换从pos开始n个字符为�
 ```
 
 ```cpp
+#include<iostream>
+using namespace std;
+#include <vector>
+#include <algorithm> // 标准算法头文件
 
+// string 容器
+
+void test01()
+{
+    string str1 = "abcdefg";
+	
+	int pos = str1.find("de"); // 找到就返回对应子串在原字符串中的下标，找不到就返回-1
+	cout << "pos=" << pos << endl;
+
+	// rfind 从右往左查找， find 从左往右查找。
+	int pos2 = str1.rfind("de"); 
+	cout << "pos2=" << pos2 << endl;
+}
+
+void test02()
+{
+	string str1="abcdefg";
+	str1.replace(1,3,"111111");
+	cout << "str1=" << str1 << endl; // str1=a111111efg
+}
+
+int main()
+{
+    test01();
+	test02();
+}
 ```
-
-
 
 ## 1.6 字符串比较
 
@@ -213,6 +241,40 @@ int compare(const string &s) const;//与字符串s比较
 int compare(const char *s) const;//与字符串s比较
 ```
 
+```cpp
+#include<iostream>
+using namespace std;
+#include <vector>
+#include <algorithm> // 标准算法头文件
+
+// string 容器
+
+void test01()
+{
+    string str1 = "xello";
+	string str2 = "hello";
+
+	if(str1.compare(str2) == 0)
+	{
+		cout << "str1等于str2" << endl;
+	}
+	else if(str1.compare(str2) > 0)
+	{
+		cout << "str1大于str2" << endl;
+	}
+	else
+	{
+		cout << "str1小于str2" << endl;
+	}
+}
+
+
+int main()
+{
+    test01();
+}
+```
+
 ## 1.7 字符串存取
 
 **函数原型**
@@ -220,6 +282,10 @@ int compare(const char *s) const;//与字符串s比较
 ```cpp
 char& operator[](int n);//通过[]方式获取字符
 char& at(int n);//通过at方法获取字符
+```
+
+```cpp
+
 ```
 
 ## 1.8 插入和删除
