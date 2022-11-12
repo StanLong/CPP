@@ -285,7 +285,44 @@ char& at(int n);//通过at方法获取字符
 ```
 
 ```cpp
+#include<iostream>
+using namespace std;
+#include <vector>
+#include <algorithm> // 标准算法头文件
 
+// string 容器
+
+void test01()
+{
+    string str = "hello";
+	cout << str << endl;
+
+	// 1. 通过 [] 访问单个字符
+	for(int i=0; i<str.size(); i++)
+	{
+		cout << str[i] << " ";
+	}
+	cout << endl;
+
+	// 2. 通过 at 方式访问单个字符
+	for(int i=0; i<str.size(); i++)
+	{
+		cout << str.at(i) << " ";
+	}
+	cout << endl;
+
+	// 修改单个字符
+	str[0] = 'H';
+	cout << str << endl; // Hello
+
+	str.at(1) = 'E';
+	cout << str << endl; // HEllo
+}
+
+int main()
+{
+    test01();
+}
 ```
 
 ## 1.8 插入和删除
@@ -299,11 +336,60 @@ string& insert(int pos, int n,char c);//在指定位置插入n个字符c
 string& erase(int pos, int n = npos);//删除从pos开始的n个字符
 ```
 
+```cpp
+#include<iostream>
+using namespace std;
+#include <vector>
+#include <algorithm> // 标准算法头文件
+
+// string 容器
+
+void test01()
+{
+    string str = "hello";
+	
+	// 插入
+	str.insert(1, "111");
+	cout << str << endl; // h111ello
+
+	// 删除
+	str.erase(1,3);
+	cout << str << endl; // hello
+}
+
+
+int main()
+{
+    test01();
+}
+```
+
 ## 1.9 子串
 
 **函数原型**
 
 ```cpp
 string substr(int pos = 0,int n = npos) const;//返回由pos开始的n个字符组成的字符串
+```
+
+```cpp
+#include<iostream>
+using namespace std;
+#include <vector>
+#include <algorithm> // 标准算法头文件
+
+// string 容器
+
+void test01()
+{
+    string str = "abcdef";
+	string substr = str.substr(1, 3);
+	cout << substr << endl; // bcd	
+}
+
+int main()
+{
+    test01();
+}
 ```
 
