@@ -3,41 +3,40 @@ using namespace std;
 #include <vector>
 #include <algorithm> // 标准算法头文件
 
-// string 容器
+// vector 容器
+
+void printVector(vector<int> &v)
+{
+	for(vector<int>::iterator it = v.begin(); it!=v.end(); it++)
+	{
+		cout<< *it << "";
+	}
+	cout << endl;
+}
 
 void test01()
 {
-    string str1 = "我";
-	str1 += "爱玩游戏";
-	cout << "str1=" << str1 << endl;
+    vector<int> v1; // 默认构造，无参构造
+	for(int i=0; i<10; i++)
+	{
+		v1.push_back(i);
+	}
+	printVector(v1);
 
-	str1 += ':';
-	cout << "str1=" << str1 << endl;
+	// 通过区间的方式进行构造
+	vector<int> v2(v1.begin(), v1.end());
+	printVector(v2);
 
-	string str2 = "LOL, DNF";
-	str1 += str2;
-	cout << "str1=" << str1 << endl;
+	// n 个 elem 方式构造
+	vector<int> v3(10, 100); // 10 个 100
+	printVector(v3);
 
-	string str3 = "I";
-	str3.append(" love");
-	cout << "str3=" << str3 << endl;
-
-	str3.append(" game abcde", 5);
-	cout << "str3=" << str3 << endl;
-
-
-	//str3.append(str2);
-	//cout << "str3=" << str3 << endl;
-
-	str3.append(str2, 0, 3);
-	cout << "str3=" << str3 << endl;
-
-
-
-
-
-
+	// 拷贝构造
+	vector<int> v4(v3);
+	printVector(v4);
+	
 }
+
 
 int main()
 {
