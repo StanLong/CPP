@@ -1,42 +1,38 @@
 #include<iostream>
 using namespace std;
-#include <vector>
+#include <deque>
 #include <algorithm> // 标准算法头文件
 
-// vector 容器
-
-void printVector(vector<int> &v)
+// deque 容器
+void printDeque(const deque<int> &d) // 
 {
-	for(vector<int>::iterator it = v.begin(); it!=v.end(); it++)
+	for(deque<int>::const_iterator it = d.begin(); it != d.end(); it++)
 	{
-		cout<< *it << "";
+		// *it = 100; 容器加了 const 关键字，不可更改
+		cout << *it << " ";
 	}
 	cout << endl;
 }
 
 void test01()
 {
-    vector<int> v1; // 默认构造，无参构造
-	for(int i=0; i<10; i++)
-	{
-		v1.push_back(i);
-	}
-	printVector(v1);
+	deque<int> d1;
+	d1.push_back(10);
+	d1.push_back(20);
+	d1.push_back(30);
+	d1.push_front(100);
+	d1.push_front(200);
+	d1.push_front(300);
+	// 排序前
+	printDeque(d1); // 300 200 100 10 20 30
 
-	// 通过区间的方式进行构造
-	vector<int> v2(v1.begin(), v1.end());
-	printVector(v2);
+	sort(d1.begin(), d1.end());
+	// 排序后，默认升序
+	printDeque(d1); // 10 20 30 100 200 300
 
-	// n 个 elem 方式构造
-	vector<int> v3(10, 100); // 10 个 100
-	printVector(v3);
-
-	// 拷贝构造
-	vector<int> v4(v3);
-	printVector(v4);
 	
-}
 
+}
 
 int main()
 {
