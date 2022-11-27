@@ -45,10 +45,55 @@ List有一个重要的性质，插入操作和删除操作都不会造成原有l
 **函数原型：**
 
 - `list lst;` //list采用采用模板类实现,对象的默认构造形式：
-
 - `list(beg,end);` //构造函数将[beg, end)区间中的元素拷贝给本身。
 - `list(n,elem);` //构造函数将n个elem拷贝给本身。
 - `list(const list &lst);` //拷贝构造函数。
+
+```cpp
+#include<iostream>
+using namespace std;
+#include <list>
+#include <algorithm> // 标准算法头文件
+
+// list 容器
+void printList(const list<int> &l1) // 
+{
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+void test01()
+{
+	list<int> l1; // 默认构造
+	
+	// 添加数据
+	l1.push_back(10);
+	l1.push_back(20);
+	l1.push_back(30);
+	l1.push_back(40);
+	l1.push_back(50);
+
+	// 遍历容器
+	printList(l1);
+
+	list<int> l2(l1.begin(), l1.end()); // 区间方式构造
+	printList(l2);
+
+	list<int> l3(l2); // 拷贝构造
+	printList(l3);
+
+	list<int>l4(10, 1000); // 10 个 1000
+	printList(l4);
+}
+
+int main()
+{
+    test01();
+}
+```
 
 ## 3. 赋值和交换
 
