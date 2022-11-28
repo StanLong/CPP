@@ -100,20 +100,78 @@ int main()
 **函数原型：**
 
 - `assign(beg, end);` //将[beg, end)区间中的数据拷贝赋值给本身。
-
 - `assign(n, elem);` //将n个elem拷贝赋值给本身。
 - `list& operator=(const list &lst);` //重载等号操作符
-- `swap(lst);` //将lst与本身的元素互换。
+- `swap(lst);` //将list与本身的元素互换。
+
+```cpp
+# include <iostream>
+using namespace std;
+#include <list>
+
+// list列表
+void printList(const list<int> &l1) // 
+{
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+void test01()
+{
+    list<int> l1;
+    l1.push_back(10);
+    l1.push_back(20);
+    l1.push_back(30);
+    l1.push_back(40);
+
+    list<int> l2;
+    l2 = l1;
+    printList(l2);
+
+    list<int> l3;
+    l3.assign(l2.begin(), l2.end());
+    printList(l3);
+
+    list<int> l4;
+    l4.assign(10, 100); // 10 个 100
+    printList(l4);
+
+    list<int> l5;
+    l5.push_back(90);
+    l5.push_back(80);
+    l5.push_back(70);
+    l5.push_back(60);
+
+    cout << "-----------交换前-----------" << endl;
+    printList(l1);
+    printList(l5);
+    cout << "-----------交换后-----------" << endl;
+    l5.swap(l1);
+    printList(l1);
+    printList(l5);
+}
+
+int main(int argc, char *argv[])
+{
+   test01();
+}
+```
 
 ## 4. 大小操作
 
 **函数原型：**
 
 - `size(); `//返回容器中元素的个数
-
 - `empty(); `//判断容器是否为空
 - `resize(num);` //重新指定容器的长度为num，若容器变长，则以默认值0来填充新位置。如果容器变短，则末尾超出容器长度的元素被删除。
 - `resize(num, elem); `//重新指定容器的长度为num，若容器变长，则以elem值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除
+
+```cpp
+
+```
 
 ## 5. 插入和删除
 
