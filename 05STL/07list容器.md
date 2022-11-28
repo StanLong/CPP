@@ -304,6 +304,50 @@ int main(int argc, char *argv[])
 - `front();` //返回第一个元素。
 - `back();` //返回最后一个元素。
 
+```cpp
+#include<iostream>
+using namespace std;
+#include <list>
+#include <algorithm> // 标准算法头文件
+
+// list 容器
+void printList(const list<int> &l1) // 
+{
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+void test01()
+{
+	list<int> l1;
+    l1.push_back(10); 
+    l1.push_back(20);
+    l1.push_back(30);
+    l1.push_back(40);
+
+	// 不可以用 l1[] 或者 l1.at() 的方式访问list容器中的元素
+	// 因为list本质是个链表
+
+	cout << "第一个元素：" << l1.front() << endl;
+	cout << "最后一个元素：" << l1.back() << endl;
+
+	// 验证迭代器是不支持随机访问的
+	list<int>::iterator it = l1.begin();
+	it++; // 支持双向
+	it--;
+	// it=it+1; // 不支持随机访问
+
+}
+
+int main()
+{
+    test01();
+}
+```
+
 ## 7. 反转和排序
 
 注意List不支持`#include <algorithm>`中的排序算法，因为List容器的迭代器不能跳跃式访问
