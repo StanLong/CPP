@@ -228,18 +228,66 @@ int main(int argc, char *argv[])
 - push_back(elem);//在容器尾部加入一个元素
 - pop_back();//删除容器中最后一个元素
 - push_front(elem);//在容器开头插入一个元素
-
 - pop_front();//从容器开头移除第一个元素
 - insert(pos,elem);//在pos位置插elem元素的拷贝，返回新数据的位置。
-
 - insert(pos,n,elem);//在pos位置插入n个elem数据，无返回值。
 - insert(pos,beg,end);//在pos位置插入[beg,end)区间的数据，无返回值。
 - clear();//移除容器的所有数据
-
 - erase(beg,end);//删除[beg,end)区间的数据，返回下一个数据的位置。
 - erase(pos);//删除pos位置的数据，返回下一个数据的位置。
-
 - remove(elem);//删除容器中所有与elem值匹配的元素。不需要提供迭代器
+
+```cpp
+# include <iostream>
+using namespace std;
+#include <list>
+
+// list列表
+void printList(const list<int> &l1) // 
+{
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+void test01()
+{
+    list<int> l1;
+    l1.push_back(10); // 尾插
+    l1.push_back(20);
+    l1.push_back(30);
+    l1.push_back(40);
+
+
+    l1.push_front(100); // 头插
+    l1.push_front(200);
+    l1.push_front(300);
+    l1.push_front(400);
+
+    printList(l1); // 400 300 200 100 10 20 30 40
+
+    l1.pop_back(); // 尾删
+    printList(l1); // 400 300 200 100 10 20 30 
+
+    l1.pop_front(); // 头删
+    printList(l1); // 300 200 100 10 20 30
+
+    l1.insert(l1.begin(), 1000); // insert 插入
+    printList(l1); // 1000 300 200 100 10 20 30 
+
+    
+
+}
+
+int main(int argc, char *argv[])
+{
+   test01();
+}
+```
+
+
 
 ## 6. 数据存取
 
