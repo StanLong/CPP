@@ -274,11 +274,21 @@ void test01()
     l1.pop_front(); // 头删
     printList(l1); // 300 200 100 10 20 30
 
-    l1.insert(l1.begin(), 1000); // insert 插入
-    printList(l1); // 1000 300 200 100 10 20 30 
+    // l1.insert(l1.begin(), 1000); // insert 插入， 第一个参数为迭代器
+    // printList(l1); // 1000 300 200 100 10 20 30 
 
-    
+    list<int>::iterator it = l1.begin();
+    ++it; // 迭代器偏移
+    l1.insert(it, 2000);
+    printList(l1); // 300 2000 200 100 10 20 30
 
+    l1.erase(it);  // 按迭代器指向的位置删除
+    printList(l1); // 300 2000 100 10 20 30
+
+    l1.remove(2000); // 移除容器中所有指定的值
+    printList(l1); // 300 100 10 20 30
+
+    l1.clear(); // 清空
 }
 
 int main(int argc, char *argv[])
@@ -286,8 +296,6 @@ int main(int argc, char *argv[])
    test01();
 }
 ```
-
-
 
 ## 6. 数据存取
 
