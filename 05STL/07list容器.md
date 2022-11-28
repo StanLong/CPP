@@ -170,7 +170,53 @@ int main(int argc, char *argv[])
 - `resize(num, elem); `//重新指定容器的长度为num，若容器变长，则以elem值填充新位置。如果容器变短，则末尾超出容器长度的元素被删除
 
 ```cpp
+# include <iostream>
+using namespace std;
+#include <list>
 
+// list列表
+void printList(const list<int> &l1) // 
+{
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+void test01()
+{
+    list<int> l1;
+    l1.push_back(10);
+    l1.push_back(20);
+    l1.push_back(30);
+    l1.push_back(40);
+
+    printList(l1);
+
+    if(l1.empty())
+    {
+        cout << "容器为空" << endl;
+    }
+    else
+    {
+        cout << "容器不为空, 元素个数为:" << l1.size() << endl;
+    }
+
+    //l1.resize(10);
+    // printList(l1); // 容器变长，则以默认值0来填充新位置, 10 20 30 40 0 0 0 0 0 0
+    l1.resize(10, 100); // 或者不用默认的0， 手动指定填充元素 10 20 30 40 100 100 100 100 100 100
+    printList(l1);
+
+    l1.resize(2);
+    printList(l1); // 容器变短，则末尾超出容器长度的元素被删除。10 20
+
+}
+
+int main(int argc, char *argv[])
+{
+   test01();
+}
 ```
 
 ## 5. 插入和删除
