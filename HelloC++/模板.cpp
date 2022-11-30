@@ -1,38 +1,45 @@
 #include<iostream>
 using namespace std;
-#include <deque>
+#include <list>
 #include <algorithm> // 标准算法头文件
 
-// deque 容器
-void printDeque(const deque<int> &d) // 
+// list 容器
+void printList(const list<int> &l1) // 
 {
-	for(deque<int>::const_iterator it = d.begin(); it != d.end(); it++)
+	for(list<int>::const_iterator it = l1.begin(); it != l1.end(); it++)
 	{
-		// *it = 100; 容器加了 const 关键字，不可更改
 		cout << *it << " ";
 	}
 	cout << endl;
 }
 
+// 如果要降序排
+bool myCompare(int v1, int v2)
+{
+	return v1>v2;
+}
+
 void test01()
 {
-	deque<int> d1;
-	d1.push_back(10);
-	d1.push_back(20);
-	d1.push_back(30);
-	d1.push_front(100);
-	d1.push_front(200);
-	d1.push_front(300);
-	// 排序前
-	printDeque(d1); // 300 200 100 10 20 30
+	list<int> l1;
+    l1.push_back(20); 
+    l1.push_back(10);
+    l1.push_back(30);
+    l1.push_back(40);
 
-	sort(d1.begin(), d1.end());
-	// 排序后，默认升序
-	printDeque(d1); // 10 20 30 100 200 300
+	l1.reverse(); // 反转
 
-	
+	printList(l1);
 
+	// 排序
+	// sort(l1.begin(), l1.end()); // 所有不支持随机访问迭代器的容器，不可以用标准算法， 内部分提供对应的一些成员函数的算法
+	l1.sort();
+	printList(l1); //  10 20 30 40 , 默认升序
+	l1.sort(myCompare); // 降序排，降序排的算法自己实现
+	printList(l1);
 }
+
+
 
 int main()
 {
