@@ -402,6 +402,20 @@ using namespace std;
 #include <string>
 #include <set>
 
+// 这里自定义的数据类型要在仿函数的上面先声明出来，不然运行会报错
+class Person
+{
+public:
+    string m_name;
+    int m_age;
+
+    Person(string name, int age)
+    {
+        m_name = name;
+        m_age = age;
+    }
+};
+
 // 仿函数实现自定义数据类型的排序
 class MyCompare
 {
@@ -413,18 +427,7 @@ public:
     }
 };
 
-class Person
-{
-    public:
-    string m_name;
-    int m_age;
 
-    Person(string name, int age)
-    {
-        m_name = name;
-        m_age = age;
-    }
-};
 
 void test01()
 {
