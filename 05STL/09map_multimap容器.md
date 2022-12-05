@@ -37,6 +37,47 @@ map/multimap容器的迭代器也不支持随机访问
 
 - `map& operator=(const map &mp);` //重载等号操作符
 
+```cpp
+#include<iostream>
+using namespace std;
+#include <string>
+#include <map>
+
+void printMap(map<int, int> &m)
+{
+	for(map<int, int>::iterator it = m.begin(); it != m.end(); it++)
+	{
+		cout << "key=" << it->first << " value=" << it->second << endl; 
+	}
+}
+
+
+void test01()
+{
+	// 默认构造
+	map<int, int> m1;
+	m1.insert(pair<int, int>(1, 10));
+	m1.insert(pair<int, int>(3, 30));
+	m1.insert(pair<int, int>(2, 20));
+	m1.insert(pair<int, int>(4, 40));
+	printMap(m1); // 默认按key升序排序
+
+	// 拷贝构造
+	map<int, int> m2(m1);
+	printMap(m2);
+
+	// 赋值
+	map<int, int> m3;
+	m3 = m2;
+	printMap(m3);
+}
+
+int main() 
+{
+	test01();
+}
+```
+
 ## 3 大小和交换
 
 函数原型：
@@ -44,6 +85,59 @@ map/multimap容器的迭代器也不支持随机访问
 - `size();` //返回容器中元素的数目
 - `empty();` //判断容器是否为空
 - `swap(st);` //交换两个集合容器
+
+```cpp
+#include<iostream>
+using namespace std;
+#include <string>
+#include <map>
+
+void printMap(map<int, int> &m)
+{
+	for(map<int, int>::iterator it = m.begin(); it != m.end(); it++)
+	{
+		cout << "key=" << it->first << " value=" << it->second << endl; 
+	}
+}
+
+
+void test01()
+{
+	// 默认构造
+	map<int, int> m1;
+	m1.insert(pair<int, int>(1, 10));
+	m1.insert(pair<int, int>(3, 30));
+	m1.insert(pair<int, int>(2, 20));
+	m1.insert(pair<int, int>(4, 40));
+	
+	if(m1.empty())
+	{
+		cout << "map是空的" << endl;
+	}
+	else
+	{
+		cout << "map的大小是" << m1.size() << endl;
+	}
+
+	map<int, int> m2;
+	m2.insert(pair<int, int>(10, 100));
+	m2.insert(pair<int, int>(9, 90));
+	m2.insert(pair<int, int>(8, 80));
+
+	m1.swap(m2);
+
+	cout <<  "交换后的m1" << endl;
+	printMap(m1);
+	// key=8 value=80
+	// key=9 value=90
+	// key=10 value=100
+}
+
+int main() 
+{
+	test01();
+}
+```
 
 ## 4 插入和删除
 
