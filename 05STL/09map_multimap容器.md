@@ -149,12 +149,112 @@ int main()
 - `erase(beg, end);` //删除迭代器区间[beg,end)的所有元素 ，返回下一个元素的迭代器。
 - `erase(key);` //**删除容器中键值为key的元素**。
 
+```cpp
+#include<iostream>
+using namespace std;
+#include <string>
+#include <map>
+
+
+void printMap(map<int, int> &m)
+{
+	for(map<int, int>::iterator it=m.begin(); it!=m.end(); it++)
+	{
+		cout << "key: " << it->first << " value: " << it->second << endl;
+	}
+	cout << endl;
+}
+
+
+void test01()
+{
+	// 默认构造
+	map<int, int> m1;
+	m1.insert(pair<int, int>(1, 10));
+	m1.insert(pair<int, int>(3, 30));
+	m1.insert(pair<int, int>(2, 20));
+	m1.insert(pair<int, int>(4, 40));
+
+	// 第二种插入方式
+	m1.insert(make_pair(5, 50));
+
+	// 第三种插入方式
+	m1.insert(map<int, int>::value_type(6, 60));
+
+	// 第四种插入方式
+	m1[6] = 60; // 不建议用 [] 来插入， 因为可以用[]访问到 value
+
+	printMap(m1);
+
+	m1.erase(6); // 按照key删除
+	printMap(m1);
+
+	m1.erase(m1.begin(), m1.end()); // 按区间删除
+	printMap(m1);
+	
+	m1.clear(); // 清空
+	printMap(m1);
+}
+
+int main() 
+{
+	test01();
+}
+```
+
 ## 5 查找和统计
 
 **函数原型：**
 
 - `find(key);` //查找key是否存在,若存在，返回该键的元素的迭代器；若不存在，返回set.end();
 - `count(key);` //统计key的元素个数,对于map容器。元素个数要么为0，要么为1
+
+```cpp
+#include<iostream>
+using namespace std;
+#include <string>
+#include <map>
+
+
+void printMap(map<int, int> &m)
+{
+	for(map<int, int>::iterator it=m.begin(); it!=m.end(); it++)
+	{
+		cout << "key: " << it->first << " value: " << it->second << endl;
+	}
+	cout << endl;
+}
+
+
+void test01()
+{
+	// 默认构造
+	map<int, int> m1;
+	m1.insert(pair<int, int>(1, 10));
+	m1.insert(pair<int, int>(3, 30));
+	m1.insert(pair<int, int>(2, 20));
+	m1.insert(pair<int, int>(4, 40));
+
+	map<int, int>::iterator pos = m1.find(3);
+	if(pos != m1.end())
+	{
+		cout << "查到了元素 key=" << (*pos).first << " value=" << pos->second << endl;
+	}
+	else
+	{
+		cout << "未找到元素" << endl;
+	}
+
+	// 统计
+	int num = m1.count(3); // map 不允许插入重复的元素，这个值要么是0，要么是1, multimap 的统计结果可能会大于1
+	cout << "num= " << num << endl;	
+}
+
+int main() 
+{
+	test01();
+}
+```
 
 ## 6 排序
 
@@ -163,3 +263,45 @@ int main()
 **主要技术点:**
 
 - 利用仿函数，可以改变排序规则
+
+```cpp
+#include<iostream>
+using namespace std;
+#include <string>
+#include <map>
+
+
+class MyCompare
+{
+public:
+	bool operator()(int v1, int v2)
+	{
+		// 降序排
+		return v1 > v2;
+	}
+};
+
+
+
+void test01()
+{
+	// 默认构造
+	map<int, int, MyCompare> m1;
+	m1.insert(pair<int, int>(1, 10));
+	m1.insert(pair<int, int>(3, 30));
+	m1.insert(pair<int, int>(2, 20));
+	m1.insert(pair<int, int>(4, 40));
+
+	for(map<int, int, MyCompare>::iterator it=m1.begin(); it!=m1.end(); it++)
+	{
+		cout << "key: " << it->first << " value: " << it->second << endl;
+	}
+	cout << endl;
+}
+
+int main() 
+{
+	test01();
+}
+```
+
